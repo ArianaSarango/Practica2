@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APE 2 - Clausura de Kleene</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Análisis de Lenguajes</h1>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="label">Alfabeto</span>
+                <span class="value">{{ alfabeto|join(', ') }}</span>
+            </div>
+            <div class="stat-card">
+                <span class="label">Iteraciones</span>
+                <span class="value">{{ iteraciones }}</span>
+            </div>
+        </div>
+
+        <section>
+            <h3>Cadenas Generadas (L*)</h3>
+            <div class="scroll-box">
+                {% for cadena in cadenas %}
+                    <span class="token">{{ cadena if cadena != "" else "ε" }}</span>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section>
+            <h3>Análisis de Crecimiento</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Iteración</th>
+                            <th>Cantidad de Cadenas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in crecimiento %}
+                        <tr>
+                            <td>Nivel {{ item.iter }}</td>
+                            <td><span class="count">{{ item.cant }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
